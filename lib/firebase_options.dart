@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'ecommerce-flutter-app-dd82a.firebaseapp.com',
     storageBucket: 'ecommerce-flutter-app-dd82a.firebasestorage.app',
   );
+
 }

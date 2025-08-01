@@ -1,4 +1,6 @@
 import 'package:e_commerce_flutter_app/screens/auth_screen.dart';
+import 'package:e_commerce_flutter_app/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +31,19 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce App',
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          } else {
+            return const AuthScreen();
+          }
+        },
+      ),
     );
   }
 }

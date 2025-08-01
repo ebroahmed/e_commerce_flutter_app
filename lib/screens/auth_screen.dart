@@ -26,30 +26,24 @@ class _AuthScreenState extends State<AuthScreen> {
     _formKey.currentState!.save();
     try {
       if (_isLogin) {
-        await _firebase.signInWithEmailAndPassword(
+        final userCredential = await _firebase.signInWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
+        print(userCredential);
       } else {
-        await _firebase.createUserWithEmailAndPassword(
+        final userCredential = await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
+        print(userCredential);
       }
     } on FirebaseAuthException catch (error) {
-      String message = 'An error occurred, please check your credentials.';
-      if (error.code == 'weak-password') {
-        message = 'The password provided is too weak.';
-      } else if (error.code == 'email-already-in-use') {
-        message = 'The account already exists for that email.';
-      } else if (error.code == 'user-not-found') {
-        message = 'No user found for that email.';
-      } else if (error.code == 'wrong-password') {
-        message = 'Wrong password provided for that user.';
-      }
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(message)));
+      if (error.code == 'email-already-in-use') {}
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message ?? 'Authentication failed.')),
+      );
     }
   }
 
@@ -73,7 +67,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Image.asset('assets/images/ecommerce.png'),
               ),
               Card(
-                color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                color: Theme.of(
+                  context,
+                ).colorScheme.surface.withValues(alpha: 1),
                 margin: EdgeInsets.all(20),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -83,8 +79,15 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                             decoration: InputDecoration(
                               labelText: 'Email Address',
+
+                              focusColor: Theme.of(
+                                context,
+                              ).colorScheme.primaryContainer,
                             ),
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
@@ -101,7 +104,11 @@ class _AuthScreenState extends State<AuthScreen> {
                               _enteredEmail = value!;
                             },
                           ),
+
                           TextFormField(
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                             decoration: InputDecoration(labelText: 'Password'),
                             obscureText: true,
                             validator: (value) {
