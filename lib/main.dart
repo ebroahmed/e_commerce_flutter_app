@@ -1,3 +1,4 @@
+import 'package:e_commerce_flutter_app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,11 +26,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'E-Commerce App',
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: ,
+      home: AuthScreen(),
     );
   }
 }
-
