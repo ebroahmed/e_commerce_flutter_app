@@ -13,10 +13,12 @@ class RegisterScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Register",
           style: GoogleFonts.spectralSc(
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.surface,
           ),
         ),
       ),
@@ -77,7 +79,7 @@ class RegisterScreen extends ConsumerWidget {
                   );
                 }
               },
-              child: Text("Register"),
+              child: Text("Sign Up"),
             ),
           ],
         ),
