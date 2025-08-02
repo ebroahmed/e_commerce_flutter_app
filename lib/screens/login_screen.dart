@@ -33,6 +33,8 @@ class LoginScreen extends ConsumerWidget {
               child: Image.asset('assets/images/ecommerce2.png'),
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
               controller: emailController,
               decoration: InputDecoration(
                 labelText: "Email",
@@ -43,6 +45,7 @@ class LoginScreen extends ConsumerWidget {
             ),
             TextField(
               controller: passwordController,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
               decoration: InputDecoration(
                 labelText: "Password",
                 labelStyle: TextStyle(
@@ -63,9 +66,17 @@ class LoginScreen extends ConsumerWidget {
                       .read(authRepositoryProvider)
                       .signIn(emailController.text, passwordController.text);
                 } catch (e) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text("Login failed: $e")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      content: Text(
+                        "Login failed: $e",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  );
                 }
               },
               child: Text("Login"),

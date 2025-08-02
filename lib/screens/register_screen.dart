@@ -34,6 +34,9 @@ class RegisterScreen extends ConsumerWidget {
             ),
             TextField(
               controller: emailController,
+
+              keyboardType: TextInputType.emailAddress,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
               decoration: InputDecoration(
                 labelText: "Email",
                 labelStyle: TextStyle(
@@ -43,6 +46,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             TextField(
               controller: passwordController,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
               decoration: InputDecoration(
                 labelText: "Password",
                 labelStyle: TextStyle(
@@ -71,11 +75,27 @@ class RegisterScreen extends ConsumerWidget {
 
                   //  Show message
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Account created! Please login.')),
+                    SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      content: Text(
+                        'Account created! Please login.',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                      ),
+                    ),
                   );
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Registration failed: $e')),
+                    SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      content: Text(
+                        'Registration failed: $e',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                      ),
+                    ),
                   );
                 }
               },
