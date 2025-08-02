@@ -4,21 +4,55 @@ import 'package:e_commerce_flutter_app/widgets/category_filter.dart';
 import 'package:e_commerce_flutter_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late TextEditingController searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    searchController = TextEditingController();
+
+    // Optional: listen to changes and update search term provider
+    searchController.addListener(() {
+      ref.read(searchTermProvider.notifier).state = searchController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final auth = ref.read(authRepositoryProvider);
     final productsAsync = ref.watch(filteredProductListProvider);
-    final searchController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('ecommerce'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          'Ecommerce',
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.surface,
+          ),
+        ),
         actions: [
-          IconButton(icon: Icon(Icons.logout), onPressed: () => auth.logout()),
+          IconButton(
+            icon: Icon(Icons.logout),
+            color: Theme.of(context).colorScheme.surface,
+            onPressed: () => auth.logout(),
+          ),
         ],
       ),
       body: Column(
@@ -41,7 +75,7 @@ class HomeScreen extends ConsumerWidget {
             ),
           ),
 
-          // 🧭 Category filter
+          //  Category filter
           const CategoryFilter(),
 
           //  Product grid

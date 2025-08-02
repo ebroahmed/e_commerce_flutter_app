@@ -1,6 +1,7 @@
 import 'package:e_commerce_flutter_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends ConsumerWidget {
   final emailController = TextEditingController();
@@ -14,7 +15,9 @@ class RegisterScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Register",
-          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
       ),
       body: Padding(

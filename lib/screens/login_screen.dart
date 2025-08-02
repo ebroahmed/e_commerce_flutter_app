@@ -2,6 +2,7 @@ import 'package:e_commerce_flutter_app/providers/auth_provider.dart';
 import 'package:e_commerce_flutter_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends ConsumerWidget {
   final emailController = TextEditingController();
@@ -15,7 +16,9 @@ class LoginScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           "Login",
-          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
       ),
       body: Padding(
