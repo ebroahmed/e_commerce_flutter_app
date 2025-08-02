@@ -37,12 +37,18 @@ class ProductCard extends StatelessWidget {
               product.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text('\$${product.price.toStringAsFixed(2)}'),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              '\$${product.price.toStringAsFixed(2)}',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
           ),
         ],
       ),

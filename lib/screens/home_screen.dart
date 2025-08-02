@@ -64,6 +64,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               controller: searchController,
               decoration: InputDecoration(
                 hintText: 'Search products...',
+                hintStyle: TextStyle(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.8),
+                ),
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),

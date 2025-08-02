@@ -33,7 +33,13 @@ class CategoryFilter extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: ChoiceChip(
-              label: Text(category),
+              label: Text(
+                category,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
               selected: isSelected,
               onSelected: (_) {
                 ref.read(selectedCategoryProvider.notifier).state =
