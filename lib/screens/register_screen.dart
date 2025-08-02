@@ -32,10 +32,20 @@ class RegisterScreen extends ConsumerWidget {
                   await ref
                       .read(authRepositoryProvider)
                       .register(emailController.text, passwordController.text);
+
+                  // ✅ Logout to force login manually
+                  await ref.read(authRepositoryProvider).logout();
+
+                  // ✅ Navigate back to login screen
                   Navigator.pop(context);
+
+                  // Optional: Show message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Account created! Please login.')),
+                  );
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Registration failed: $e")),
+                    SnackBar(content: Text('Registration failed: $e')),
                   );
                 }
               },
