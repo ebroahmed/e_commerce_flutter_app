@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_flutter_app/models/product_model.dart';
 
 class ProductRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CollectionReference productsRef = FirebaseFirestore.instance.collection(
     'products',
   );
