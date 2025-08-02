@@ -30,7 +30,7 @@ class RegisterScreen extends ConsumerWidget {
             Container(
               margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
               width: 200,
-              child: Image.asset('assets/images/ecommerce.png'),
+              child: Image.asset('assets/images/ecommerce2.png'),
             ),
             TextField(
               controller: emailController,
