@@ -12,22 +12,47 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(
+        title: Text(
+          "Login",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
+              width: 200,
+              child: Image.asset('assets/images/ecommerce.png'),
+            ),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: InputDecoration(
+                labelText: "Email",
+                labelStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ),
             TextField(
               controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
+              decoration: InputDecoration(
+                labelText: "Password",
+                labelStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
               obscureText: true,
             ),
             SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.surface,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+              ),
               onPressed: () async {
                 try {
                   await ref
@@ -41,6 +66,7 @@ class LoginScreen extends ConsumerWidget {
               },
               child: Text("Login"),
             ),
+            SizedBox(height: 10),
             TextButton(
               onPressed: () => Navigator.push(
                 context,

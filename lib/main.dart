@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF3A5A98)),
+  colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 4, 31, 87)),
   textTheme: GoogleFonts.poppinsTextTheme(),
 );
 
