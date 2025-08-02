@@ -1,5 +1,6 @@
 import 'package:e_commerce_flutter_app/providers/auth_provider.dart';
 import 'package:e_commerce_flutter_app/providers/product_provider.dart';
+import 'package:e_commerce_flutter_app/screens/cart_screen.dart';
 import 'package:e_commerce_flutter_app/widgets/category_filter.dart';
 import 'package:e_commerce_flutter_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onPressed: () => auth.logout(),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(
+          Icons.shopping_cart,
+          color: Theme.of(context).colorScheme.surface,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const CartScreen()),
+          );
+        },
       ),
       body: Column(
         children: [
