@@ -4,13 +4,13 @@ class ProductAdminRepository {
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> addProduct({
-    required String title,
+    required String name,
     required double price,
     required String imageUrl,
     required String category,
   }) async {
     final productData = {
-      'title': title,
+      'name': name,
       'price': price,
       'imageUrl': imageUrl,
       'category': category,

@@ -13,7 +13,7 @@ class AdminAddProductScreen extends ConsumerStatefulWidget {
 
 class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
+  final _nameController = TextEditingController();
   final _priceController = TextEditingController();
   final _imageUrlController = TextEditingController();
   String _selectedCategory = 'Shoes';
@@ -34,7 +34,7 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
     setState(() => isSubmitting = true);
 
     final productData = {
-      'title': _titleController.text,
+      'name': _nameController.text,
       'price': double.parse(_priceController.text),
       'imageUrl': _imageUrlController.text,
       'category': _selectedCategory,
@@ -47,7 +47,7 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
           const SnackBar(content: Text('Product added successfully!')),
         );
         _formKey.currentState!.reset();
-        _titleController.clear();
+        _nameController.clear();
         _priceController.clear();
         _imageUrlController.clear();
         setState(() => _selectedCategory = 'Shoes');
@@ -72,8 +72,8 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
           child: ListView(
             children: [
               TextFormField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Title'),
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),

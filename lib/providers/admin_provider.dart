@@ -8,7 +8,7 @@ final addProductProvider = FutureProvider.family
       final repo = ref.read(adminRepositoryProvider);
 
       return repo.addProduct(
-        title: productData['title'],
+        name: productData['name'],
         price: productData['price'],
         imageUrl: productData['imageUrl'],
         category: productData['category'],
