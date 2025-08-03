@@ -3,6 +3,7 @@ import 'package:e_commerce_flutter_app/providers/order_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -14,11 +15,27 @@ class ProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
-      appBar: AppBar(title: const Text('My Profile')),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          'My Profile',
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+        ),
+      ),
       body: authAsync.when(
         data: (user) {
           if (user == null) {
-            return const Center(child: Text("User not logged in"));
+            return Center(
+              child: Text(
+                "User not logged in",
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            );
           }
 
           return Column(
@@ -38,16 +55,26 @@ class ProfileScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(user.email ?? "", style: TextStyle(fontSize: 16)),
+              Text(
+                user.email ?? "",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
 
               const SizedBox(height: 30),
-              const Divider(),
+              Divider(),
 
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   "My Orders",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
 
@@ -56,23 +83,53 @@ class ProfileScreen extends ConsumerWidget {
                 child: ordersAsync.when(
                   data: (orders) {
                     if (orders.isEmpty) {
-                      return const Center(child: Text("No orders yet."));
+                      return Center(
+                        child: Text(
+                          "No orders yet.",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      );
                     }
                     return ListView.builder(
                       itemCount: orders.length,
                       itemBuilder: (_, index) {
                         final order = orders[index];
                         return ListTile(
-                          title: Text("Order to: ${order.address}"),
-                          subtitle: Text(order.timestamp.toDate().toString()),
-                          trailing: Text('\$${order.total.toStringAsFixed(2)}'),
+                          title: Text(
+                            "Order to: ${order.address}",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          subtitle: Text(
+                            order.timestamp.toDate().toString(),
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          trailing: Text(
+                            '\$${order.total.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: const Color.fromARGB(255, 105, 95, 5),
+                            ),
+                          ),
                         );
                       },
                     );
                   },
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (e, _) => Center(child: Text("Error: $e")),
+                  error: (e, _) => Center(
+                    child: Text(
+                      "Error: $e",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
                 ),
               ),
 
@@ -85,13 +142,26 @@ class ProfileScreen extends ConsumerWidget {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Logged out")),
+                        SnackBar(
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          content: Text(
+                            "Logged out",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
                       );
                     }
                   },
-                  icon: const Icon(Icons.logout),
-                  label: const Text('Logout'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  icon: Icon(Icons.logout),
+                  label: Text('Logout'),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                    backgroundColor: const Color.fromARGB(255, 109, 23, 17),
+                  ),
                 ),
               ),
             ],

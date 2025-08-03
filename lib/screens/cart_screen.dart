@@ -14,7 +14,7 @@ class CartScreen extends ConsumerWidget {
     final total = cartNotifier.totalPrice;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
         backgroundColor: Theme.of(context).colorScheme.primary,
