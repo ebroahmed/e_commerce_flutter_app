@@ -1,6 +1,7 @@
 import 'package:e_commerce_flutter_app/providers/auth_provider.dart';
 import 'package:e_commerce_flutter_app/providers/product_provider.dart';
 import 'package:e_commerce_flutter_app/screens/cart_screen.dart';
+import 'package:e_commerce_flutter_app/screens/profile_screen.dart';
 import 'package:e_commerce_flutter_app/widgets/category_filter.dart';
 import 'package:e_commerce_flutter_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.logout),
             color: Theme.of(context).colorScheme.surface,
