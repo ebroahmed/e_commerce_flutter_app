@@ -96,7 +96,10 @@ class CartScreen extends ConsumerWidget {
                             ],
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Color.fromARGB(255, 109, 23, 17),
+                            ),
                             onPressed: () =>
                                 cartNotifier.removeFromCart(item.product.id),
                           ),

@@ -15,7 +15,8 @@ class ProductCard extends ConsumerWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     return wishlist.when(
-      data: (wishlistIds) {
+      data: (wishlistItems) {
+        final wishlistIds = wishlistItems.map((item) => item['id']).toList();
         final isWishlisted = wishlistIds.contains(product.id);
 
         return GestureDetector(
@@ -28,33 +29,37 @@ class ProductCard extends ConsumerWidget {
           },
           child: Card(
             color: Theme.of(context).colorScheme.onPrimary,
-            elevation: 4,
+            elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //  Product Image
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(10),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Fixed-height Image
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Image.network(
-                      product.imageUrl,
-                      width: double.infinity,
-                      fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) =>
-                          const Center(child: Icon(Icons.broken_image)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        product.imageUrl,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) =>
+                            const Center(child: Icon(Icons.broken_image)),
+                      ),
                     ),
                   ),
-                ),
 
-                //  Product Info
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
+                  const SizedBox(height: 25),
+
+                  //  Product Name
+                  Text(
                     product.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -63,36 +68,40 @@ class ProductCard extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        '\$${product.price.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 105, 95, 5),
+
+                  const SizedBox(height: 4),
+
+                  //  Price and Wishlist Icon in Row
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color.fromARGB(255, 105, 95, 5),
+                          ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: IconButton(
-                        icon: Icon(
-                          isWishlisted ? Icons.favorite : Icons.favorite_border,
-                          color: isWishlisted ? Colors.red : Colors.grey,
-                        ),
-                        onPressed: () async {
-                          final repo = ref.read(wishlistRepoProvider);
-                          final productMap = {
-                            'id': product.id,
-                            'name': product.name,
-                            'price': product.price,
-                            'imageUrl': product.imageUrl,
-                            'category': product.category,
-                          };
-                          if (user != null) {
+                        IconButton(
+                          icon: Icon(
+                            isWishlisted
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: isWishlisted ? Colors.red : Colors.grey,
+                          ),
+                          onPressed: () async {
+                            if (user == null) return;
+
+                            final repo = ref.read(wishlistRepoProvider);
+                            final productMap = {
+                              'id': product.id,
+                              'name': product.name,
+                              'price': product.price,
+                              'imageUrl': product.imageUrl,
+                              'category': product.category,
+                            };
+
                             if (isWishlisted) {
                               await repo.removeFromWishlist(
                                 user.uid,
@@ -101,18 +110,18 @@ class ProductCard extends ConsumerWidget {
                             } else {
                               await repo.addToWishlist(user.uid, productMap);
                             }
-                          }
-                        },
-                      ),
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => const Icon(Icons.error),
     );
   }

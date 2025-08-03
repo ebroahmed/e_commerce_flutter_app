@@ -3,6 +3,7 @@ import 'package:e_commerce_flutter_app/providers/product_provider.dart';
 import 'package:e_commerce_flutter_app/screens/admin_add_product_screen.dart';
 import 'package:e_commerce_flutter_app/screens/cart_screen.dart';
 import 'package:e_commerce_flutter_app/screens/profile_screen.dart';
+import 'package:e_commerce_flutter_app/screens/wishlist_screen.dart';
 import 'package:e_commerce_flutter_app/widgets/category_filter.dart';
 import 'package:e_commerce_flutter_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -147,6 +148,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               },
             ),
 
+            ListTile(
+              leading: Icon(
+                Icons.favorite,
+                color: Theme.of(context).colorScheme.primary,
+                size: 30,
+              ),
+              title: Text(
+                'Wishlist',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => WishlistScreen()),
+                );
+              },
+            ),
+
             // Logout
             Consumer(
               builder: (context, ref, _) => ListTile(
@@ -230,17 +253,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   );
                 }
 
-                return GridView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: products.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 0.7,
+                return Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(12),
+                    itemCount: products.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.7,
+                        ),
+                    itemBuilder: (_, index) =>
+                        ProductCard(product: products[index]),
                   ),
-                  itemBuilder: (_, index) =>
-                      ProductCard(product: products[index]),
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
