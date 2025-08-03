@@ -2,6 +2,7 @@
 import 'package:e_commerce_flutter_app/providers/admin_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AdminAddProductScreen extends ConsumerStatefulWidget {
   const AdminAddProductScreen({super.key});
@@ -70,23 +71,48 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add New Product")),
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          "Add New Product",
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
+
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
               SizedBox(height: 12),
               TextFormField(
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
@@ -94,7 +120,13 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
 
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Price'),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 keyboardType: TextInputType.number,
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
@@ -102,7 +134,14 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
               SizedBox(height: 12),
               TextFormField(
                 controller: _imageUrlController,
-                decoration: InputDecoration(labelText: 'Image URL'),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                keyboardType: TextInputType.url,
+                decoration: InputDecoration(
+                  labelText: 'Image URL',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
@@ -111,18 +150,35 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
                 value: _selectedCategory,
                 items: _categories
                     .map(
-                      (cat) => DropdownMenuItem(value: cat, child: Text(cat)),
+                      (cat) => DropdownMenuItem(
+                        value: cat,
+                        child: Text(
+                          cat,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
                     )
                     .toList(),
                 onChanged: (val) => setState(() => _selectedCategory = val!),
-                decoration: const InputDecoration(labelText: 'Category'),
+                decoration: InputDecoration(
+                  labelText: 'Category',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                ),
                 onPressed: isSubmitting ? null : _submit,
                 child: isSubmitting
-                    ? const CircularProgressIndicator()
-                    : const Text("Add Product"),
+                    ? CircularProgressIndicator()
+                    : Text("Add Product"),
               ),
             ],
           ),
