@@ -11,7 +11,7 @@ final pastOrdersProvider = StreamProvider<List<my.Order>>((ref) {
 
   return authAsync.when(
     data: (user) {
-      if (user == null) return const Stream.empty();
+      if (user == null) return Stream.empty();
 
       return FirebaseFirestore.instance
           .collection('orders')
@@ -31,7 +31,7 @@ final pastOrdersProvider = StreamProvider<List<my.Order>>((ref) {
             }).toList();
           });
     },
-    loading: () => const Stream.empty(),
-    error: (_, __) => const Stream.empty(),
+    loading: () => Stream.empty(),
+    error: (_, __) => Stream.empty(),
   );
 });
