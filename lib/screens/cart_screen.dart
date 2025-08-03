@@ -1,4 +1,5 @@
 import 'package:e_commerce_flutter_app/providers/cart_provider.dart';
+import 'package:e_commerce_flutter_app/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -128,22 +129,15 @@ class CartScreen extends ConsumerWidget {
                           ).colorScheme.primary,
                         ),
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.primary,
-                              content: Text(
-                                'Checkout not implemented yet.',
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.surface,
-                                ),
-                              ),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const CheckoutScreen(),
                             ),
                           );
                         },
                         icon: const Icon(Icons.shopping_bag),
-                        label: const Text('Checkout'),
+                        label: const Text('Proceed to Checkout'),
                       ),
                     ],
                   ),
