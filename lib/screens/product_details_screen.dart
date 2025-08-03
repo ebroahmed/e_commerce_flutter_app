@@ -21,6 +21,7 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
     final product = widget.product;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
         backgroundColor: Theme.of(context).colorScheme.primary,

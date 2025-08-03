@@ -40,6 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final productsAsync = ref.watch(filteredProductListProvider);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -103,7 +104,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: productsAsync.when(
               data: (products) {
                 if (products.isEmpty) {
-                  return const Center(child: Text('No products found.'));
+                  return Center(
+                    child: Text(
+                      'No products found.',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  );
                 }
 
                 return GridView.builder(

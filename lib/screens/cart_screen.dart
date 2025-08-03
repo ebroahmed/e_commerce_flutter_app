@@ -1,6 +1,7 @@
 import 'package:e_commerce_flutter_app/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
@@ -12,9 +13,24 @@ class CartScreen extends ConsumerWidget {
     final total = cartNotifier.totalPrice;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Cart')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          'My Cart',
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.surface,
+          ),
+        ),
+      ),
       body: cartItems.isEmpty
-          ? const Center(child: Text('Your cart is empty.'))
+          ? Center(
+              child: Text(
+                'Your cart is empty.',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            )
           : Column(
               children: [
                 Expanded(
@@ -22,53 +38,67 @@ class CartScreen extends ConsumerWidget {
                     itemCount: cartItems.length,
                     itemBuilder: (_, index) {
                       final item = cartItems[index];
-                      return ListTile(
-                        leading: Image.network(
-                          item.product.imageUrl,
-                          width: 60,
-                        ),
-                        title: Text(item.product.name),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('\$${item.product.price.toStringAsFixed(2)}'),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.remove),
-                                  onPressed: item.quantity > 1
-                                      ? () {
-                                          final updated = item.copyWith(
-                                            quantity: item.quantity - 1,
-                                          );
-                                          cartNotifier.state[index] = updated;
-                                          cartNotifier.state = [
-                                            ...cartNotifier.state,
-                                          ];
-                                        }
-                                      : null,
-                                ),
-                                Text(item.quantity.toString()),
-                                IconButton(
-                                  icon: const Icon(Icons.add),
-                                  onPressed: () {
-                                    final updated = item.copyWith(
-                                      quantity: item.quantity + 1,
-                                    );
-                                    cartNotifier.state[index] = updated;
-                                    cartNotifier.state = [
-                                      ...cartNotifier.state,
-                                    ];
-                                  },
-                                ),
-                              ],
+                      return Card(
+                        color: Colors.white,
+                        elevation: 5,
+                        child: ListTile(
+                          leading: Image.network(
+                            item.product.imageUrl,
+                            width: 60,
+                          ),
+                          title: Text(
+                            item.product.name,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
                             ),
-                          ],
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: () =>
-                              cartNotifier.removeFromCart(item.product.id),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '\$${item.product.price.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  color: const Color.fromARGB(255, 105, 95, 5),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove),
+                                    onPressed: item.quantity > 1
+                                        ? () {
+                                            final updated = item.copyWith(
+                                              quantity: item.quantity - 1,
+                                            );
+                                            cartNotifier.state[index] = updated;
+                                            cartNotifier.state = [
+                                              ...cartNotifier.state,
+                                            ];
+                                          }
+                                        : null,
+                                  ),
+                                  Text(item.quantity.toString()),
+                                  IconButton(
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () {
+                                      final updated = item.copyWith(
+                                        quantity: item.quantity + 1,
+                                      );
+                                      cartNotifier.state[index] = updated;
+                                      cartNotifier.state = [
+                                        ...cartNotifier.state,
+                                      ];
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () =>
+                                cartNotifier.removeFromCart(item.product.id),
+                          ),
                         ),
                       );
                     },
@@ -81,17 +111,34 @@ class CartScreen extends ConsumerWidget {
                     children: [
                       Text(
                         'Total: \$${total.toStringAsFixed(2)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 105, 95, 5),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surface,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                        ),
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Checkout not implemented yet.'),
+                            SnackBar(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
+                              content: Text(
+                                'Checkout not implemented yet.',
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                              ),
                             ),
                           );
                         },
