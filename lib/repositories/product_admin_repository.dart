@@ -5,12 +5,14 @@ class ProductAdminRepository {
 
   Future<void> addProduct({
     required String name,
+    required String description,
     required double price,
     required String imageUrl,
     required String category,
   }) async {
     final productData = {
       'name': name,
+      'description': description,
       'price': price,
       'imageUrl': imageUrl,
       'category': category,

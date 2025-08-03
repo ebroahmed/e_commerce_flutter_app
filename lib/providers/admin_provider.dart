@@ -9,6 +9,7 @@ final addProductProvider = FutureProvider.family
 
       return repo.addProduct(
         name: productData['name'],
+        description: productData['description'],
         price: productData['price'],
         imageUrl: productData['imageUrl'],
         category: productData['category'],

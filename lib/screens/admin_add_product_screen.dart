@@ -14,6 +14,7 @@ class AdminAddProductScreen extends ConsumerStatefulWidget {
 class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();
   final _imageUrlController = TextEditingController();
   String _selectedCategory = 'Shoes';
@@ -35,6 +36,7 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
 
     final productData = {
       'name': _nameController.text,
+      'description': _descriptionController.text,
       'price': double.parse(_priceController.text),
       'imageUrl': _imageUrlController.text,
       'category': _selectedCategory,
@@ -48,6 +50,7 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
         );
         _formKey.currentState!.reset();
         _nameController.clear();
+        _descriptionController.clear();
         _priceController.clear();
         _imageUrlController.clear();
         setState(() => _selectedCategory = 'Shoes');
@@ -73,26 +76,34 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(labelText: 'Name'),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(labelText: 'Description'),
+                validator: (value) =>
+                    value == null || value.isEmpty ? 'Required' : null,
+              ),
+              SizedBox(height: 12),
+
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(labelText: 'Price'),
+                decoration: InputDecoration(labelText: 'Price'),
                 keyboardType: TextInputType.number,
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               TextFormField(
                 controller: _imageUrlController,
-                decoration: const InputDecoration(labelText: 'Image URL'),
+                decoration: InputDecoration(labelText: 'Image URL'),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 value: _selectedCategory,
                 items: _categories

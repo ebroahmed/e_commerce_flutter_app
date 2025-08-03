@@ -69,17 +69,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               );
             },
           ),
-          IconButton(
-            icon: Icon(
-              Icons.admin_panel_settings,
-              color: Theme.of(context).colorScheme.onPrimary,
+          Consumer(
+            builder: (context, ref, _) => IconButton(
+              icon: const Icon(Icons.admin_panel_settings),
+              onPressed: () async {
+                final role = await ref.read(userRoleProvider.future);
+                if (role == 'admin') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AdminAddProductScreen(),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Access denied: Admins only")),
+                  );
+                }
+              },
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => AdminAddProductScreen()),
-              );
-            },
           ),
           IconButton(
             icon: Icon(Icons.logout),
