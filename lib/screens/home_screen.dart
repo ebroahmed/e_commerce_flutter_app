@@ -20,6 +20,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // Refresh product list every time home screen is opened
+    Future.microtask(() {
+      ref.refresh(filteredProductListProvider);
+    });
+
     searchController = TextEditingController();
 
     // Optional: listen to changes and update search term provider
