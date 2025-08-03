@@ -40,7 +40,7 @@ class CartScreen extends ConsumerWidget {
                     itemBuilder: (_, index) {
                       final item = cartItems[index];
                       return Card(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         elevation: 5,
                         child: ListTile(
                           leading: Image.network(

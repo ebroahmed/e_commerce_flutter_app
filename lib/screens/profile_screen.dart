@@ -13,6 +13,7 @@ class ProfileScreen extends ConsumerWidget {
     final ordersAsync = ref.watch(pastOrdersProvider);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(title: const Text('My Profile')),
       body: authAsync.when(
         data: (user) {
@@ -30,11 +31,14 @@ class ProfileScreen extends ConsumerWidget {
                 backgroundColor: Colors.blueGrey,
                 child: Text(
                   user.email?.substring(0, 1).toUpperCase() ?? '?',
-                  style: const TextStyle(fontSize: 32, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 32,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              Text(user.email ?? "", style: const TextStyle(fontSize: 16)),
+              Text(user.email ?? "", style: TextStyle(fontSize: 16)),
 
               const SizedBox(height: 30),
               const Divider(),

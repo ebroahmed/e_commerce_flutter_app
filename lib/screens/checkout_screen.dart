@@ -30,6 +30,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     final total = ref.read(cartProvider.notifier).totalPrice;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
         backgroundColor: Theme.of(context).colorScheme.primary,

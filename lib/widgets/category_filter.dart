@@ -33,6 +33,7 @@ class CategoryFilter extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: ChoiceChip(
+              backgroundColor: Theme.of(context).colorScheme.onPrimary,
               label: Text(
                 category,
                 style: TextStyle(
