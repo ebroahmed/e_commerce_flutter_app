@@ -49,30 +49,83 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           'Ecommerce',
           style: GoogleFonts.spectralSc(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.person,
-              color: Theme.of(context).colorScheme.onPrimary,
+      ),
+      drawer: Drawer(
+        elevation: 4,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              child: TextButton.icon(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 70,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                label: Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+              ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ProfileScreen()),
-              );
-            },
-          ),
-          Consumer(
-            builder: (context, ref, _) => IconButton(
-              icon: const Icon(Icons.admin_panel_settings),
-              onPressed: () async {
+
+            // Profile
+            ListTile(
+              leading: Icon(
+                Icons.person,
+                color: Theme.of(context).colorScheme.primary,
+                size: 30,
+              ),
+              title: Text(
+                'Profile',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ProfileScreen()),
+                );
+              },
+            ),
+
+            // Admin Panel
+            ListTile(
+              leading: Icon(
+                Icons.admin_panel_settings,
+                color: Theme.of(context).colorScheme.primary,
+                size: 30,
+              ),
+              title: Text(
+                'Admin Panel',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              onTap: () async {
+                Navigator.pop(context); // Close drawer first
                 final role = await ref.read(userRoleProvider.future);
                 if (role == 'admin') {
                   Navigator.push(
@@ -83,23 +136,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Access denied: Admins only")),
+                    SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                      content: Text("Access denied: Admins only"),
+                    ),
                   );
                 }
               },
             ),
-          ),
-          IconButton(
-            icon: Icon(Icons.logout),
-            color: Theme.of(context).colorScheme.surface,
-            onPressed: () => auth.logout(),
-          ),
-        ],
+
+            // Logout
+            Consumer(
+              builder: (context, ref, _) => ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 30,
+                ),
+                title: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context); // Close drawer
+                  final auth = ref.read(authRepositoryProvider);
+                  auth.logout();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(
-          Icons.shopping_cart,
+          Icons.shopping_cart_rounded,
           color: Theme.of(context).colorScheme.surface,
           size: 30,
         ),
