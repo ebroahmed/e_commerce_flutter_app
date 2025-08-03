@@ -6,6 +6,7 @@ import 'package:e_commerce_flutter_app/providers/order_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({super.key});
@@ -29,24 +30,45 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     final total = ref.read(cartProvider.notifier).totalPrice;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Checkout")),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          "Checkout",
+          style: GoogleFonts.spectralSc(
+            color: Theme.of(context).colorScheme.surface,
+          ),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             // Address
             TextFormField(
               controller: addressController,
-              decoration: const InputDecoration(
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              decoration: InputDecoration(
                 labelText: 'Shipping Address',
+                labelStyle: TextStyle(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.7),
+                ),
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 25),
 
             // Payment (mock)
-            const Text('Payment Method: Credit Card (Mock)'),
-            const SizedBox(height: 20),
+            Text(
+              'Payment Method: Credit Card (Mock)',
+              style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            SizedBox(height: 25),
 
             // Order Summary
             Expanded(
@@ -54,16 +76,36 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 children: [
                   ...cartItems.map(
                     (item) => ListTile(
-                      title: Text('${item.product.name} x${item.quantity}'),
+                      title: Text(
+                        '${item.product.name} x${item.quantity}',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                       trailing: Text(
                         '\$${(item.product.price * item.quantity).toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: const Color.fromARGB(255, 105, 95, 5),
+                        ),
                       ),
                     ),
                   ),
-                  const Divider(),
+                  Divider(),
                   ListTile(
-                    title: const Text('Total'),
-                    trailing: Text('\$${total.toStringAsFixed(2)}'),
+                    title: Text(
+                      'Total',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    trailing: Text(
+                      '\$${total.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: const Color.fromARGB(255, 105, 95, 5),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -73,20 +115,38 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                ),
                 child: const Text("Place Order"),
                 onPressed: () async {
                   final user = FirebaseAuth.instance.currentUser;
                   if (user == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("You must be logged in")),
+                      SnackBar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        content: Text(
+                          "You must be logged in",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
                     );
                     return;
                   }
 
                   if (addressController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Please enter your address"),
+                      SnackBar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        content: Text(
+                          "Please enter your address",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
                       ),
                     );
                     return;
@@ -110,13 +170,27 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                     if (!mounted) return;
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Order placed successfully!"),
+                      SnackBar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        content: Text(
+                          "Order placed successfully!",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
                       ),
                     );
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Error placing order: $e")),
+                      SnackBar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        content: Text(
+                          "Error placing order: $e",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
                     );
                   }
                 },
