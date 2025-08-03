@@ -56,9 +56,12 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
         setState(() => _selectedCategory = 'Shoes');
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Theme.of(context).colorScheme.error,
+          content: Text('Error: $e'),
+        ),
+      );
     }
 
     setState(() => isSubmitting = false);

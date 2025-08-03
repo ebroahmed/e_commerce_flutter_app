@@ -89,7 +89,7 @@ class RegisterScreen extends ConsumerWidget {
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context).colorScheme.error,
                       content: Text(
                         'Registration failed: $e',
                         style: TextStyle(

@@ -71,9 +71,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 color: Theme.of(context).colorScheme.primary,
               ),
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: Icon(
-                  Icons.shopping_cart_outlined,
+                  Icons.shopping_bag_outlined,
                   size: 70,
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),

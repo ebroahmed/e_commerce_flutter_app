@@ -126,9 +126,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   if (user == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context).colorScheme.error,
                         content: Text(
-                          "You must be logged in",
+                          "Please log in to place an order.",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
@@ -141,7 +141,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   if (addressController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context).colorScheme.error,
                         content: Text(
                           "Please enter your address",
                           style: TextStyle(
@@ -184,7 +184,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context).colorScheme.error,
                         content: Text(
                           "Error placing order: $e",
                           style: TextStyle(
