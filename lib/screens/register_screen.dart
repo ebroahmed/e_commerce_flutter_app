@@ -62,19 +62,46 @@ class RegisterScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    TextField(
-                      controller: passwordController,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        labelStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      obscureText: true,
+                    Consumer(
+                      builder: (context, ref, _) {
+                        final isHidden = ref.watch(passwordVisibilityProvider);
+
+                        return TextField(
+                          controller: passwordController,
+                          obscureText: isHidden,
+                          style: TextStyle(
+                            decorationColor: Theme.of(
+                              context,
+                            ).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.primary,
+                            decoration: TextDecoration.none,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            labelStyle: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isHidden
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              onPressed: () {
+                                ref
+                                        .read(
+                                          passwordVisibilityProvider.notifier,
+                                        )
+                                        .state =
+                                    !isHidden;
+                              },
+                            ),
+                          ),
+                        );
+                      },
                     ),
+
                     SizedBox(height: 16),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
