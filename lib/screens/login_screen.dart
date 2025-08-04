@@ -25,78 +25,106 @@ class LoginScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
-              width: 200,
-              child: Image.asset('assets/images/ecommerce2.png'),
-            ),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: "Email",
-                labelStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight:
+                    MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).viewInsets.bottom,
               ),
-            ),
-            TextField(
-              controller: passwordController,
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-              decoration: InputDecoration(
-                labelText: "Password",
-                labelStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.surface,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-              ),
-              onPressed: () async {
-                try {
-                  await ref
-                      .read(authRepositoryProvider)
-                      .signIn(emailController.text, passwordController.text);
-
-                  // Call the welcome notification
-                  await _notificationService
-                      .showWelcomeNotificationIfFirstTime();
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      content: Text(
-                        "Login failed: $e",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.surface,
+              child: IntrinsicHeight(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 30,
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                      ),
+                      width: 200,
+                      child: Image.asset('assets/images/ecommerce2.png'),
+                    ),
+                    // SizedBox(height: 30),
+                    TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
-                  );
-                }
-              },
-              child: Text("Login"),
-            ),
-            SizedBox(height: 10),
-            TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => RegisterScreen()),
+                    TextField(
+                      controller: passwordController,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.surface,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                      ),
+                      onPressed: () async {
+                        try {
+                          await ref
+                              .read(authRepositoryProvider)
+                              .signIn(
+                                emailController.text,
+                                passwordController.text,
+                              );
+
+                          // Call the welcome notification
+                          await _notificationService
+                              .showWelcomeNotificationIfFirstTime();
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.error,
+                              content: Text(
+                                "Login failed: $e",
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text("Login"),
+                    ),
+                    SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => RegisterScreen()),
+                      ),
+                      child: Text("Don't have an account? Register"),
+                    ),
+                  ],
+                ),
               ),
-              child: Text("Don't have an account? Register"),
             ),
-          ],
+          ),
         ),
       ),
     );
