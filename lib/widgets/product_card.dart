@@ -64,12 +64,11 @@ class ProductCard extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-
-                  const SizedBox(height: 4),
 
                   //  Price and Wishlist Icon in Row
                   Expanded(
@@ -79,7 +78,7 @@ class ProductCard extends ConsumerWidget {
                         Text(
                           '\$${product.price.toStringAsFixed(2)}',
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 15,
                             color: Color.fromARGB(255, 105, 95, 5),
                           ),
                         ),
