@@ -45,7 +45,7 @@ class RegisterScreen extends ConsumerWidget {
                         right: 20,
                       ),
                       width: 200,
-                      child: Image.asset('assets/images/ecommerce2.png'),
+                      child: Image.asset('assets/images/icon.png'),
                     ),
                     TextField(
                       controller: emailController,

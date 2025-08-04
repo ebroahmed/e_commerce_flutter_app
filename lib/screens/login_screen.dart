@@ -45,7 +45,7 @@ class LoginScreen extends ConsumerWidget {
                         right: 20,
                       ),
                       width: 200,
-                      child: Image.asset('assets/images/ecommerce2.png'),
+                      child: Image.asset('assets/images/icon.png'),
                     ),
                     // SizedBox(height: 30),
                     TextField(
