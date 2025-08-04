@@ -39,10 +39,9 @@ dependencies:
   cloud_firestore: ^6.0.0
   firebase_auth: ^6.0.0
   firebase_storage: ^13.0.0
-  flutter_hooks: ^0.21.2
-  image_picker: ^1.1.2
-  cached_network_image: ^3.4.1
   google_fonts: ^6.2.1
+  flutter_local_notifications: ^19.4.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
