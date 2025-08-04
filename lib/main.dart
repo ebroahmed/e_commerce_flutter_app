@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
-  useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 4, 62, 179)),
   textTheme: GoogleFonts.poppinsTextTheme(),
 );

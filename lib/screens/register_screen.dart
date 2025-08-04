@@ -52,6 +52,7 @@ class RegisterScreen extends ConsumerWidget {
 
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(
+                        decorationColor: Theme.of(context).colorScheme.surface,
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       decoration: InputDecoration(
