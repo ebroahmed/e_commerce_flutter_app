@@ -40,7 +40,7 @@ class ProductCard extends ConsumerWidget {
                 children: [
                   // Fixed-height Image
                   Container(
-                    height: 200,
+                    height: 150,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
