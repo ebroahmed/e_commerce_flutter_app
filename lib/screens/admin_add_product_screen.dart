@@ -93,7 +93,10 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(
+                  decorationColor: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 decoration: InputDecoration(
                   labelText: 'Name',
                   labelStyle: TextStyle(
@@ -105,7 +108,10 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
               ),
               SizedBox(height: 12),
               TextFormField(
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(
+                  decorationColor: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Description',
@@ -120,7 +126,10 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
 
               TextFormField(
                 controller: _priceController,
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(
+                  decorationColor: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 decoration: InputDecoration(
                   labelText: 'Price',
                   labelStyle: TextStyle(
@@ -134,7 +143,10 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
               SizedBox(height: 12),
               TextFormField(
                 controller: _imageUrlController,
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(
+                  decorationColor: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 keyboardType: TextInputType.url,
                 decoration: InputDecoration(
                   labelText: 'Image URL',
@@ -147,6 +159,7 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
               ),
               SizedBox(height: 12),
               DropdownButtonFormField<String>(
+                dropdownColor: Theme.of(context).colorScheme.onPrimary,
                 value: _selectedCategory,
                 items: _categories
                     .map(

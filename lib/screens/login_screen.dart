@@ -1,6 +1,5 @@
 import 'package:e_commerce_flutter_app/providers/auth_provider.dart';
 import 'package:e_commerce_flutter_app/screens/register_screen.dart';
-import 'package:e_commerce_flutter_app/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 class LoginScreen extends ConsumerWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final _notificationService = NotificationService();
 
   LoginScreen({super.key});
 
@@ -117,10 +115,6 @@ class LoginScreen extends ConsumerWidget {
                                 emailController.text,
                                 passwordController.text,
                               );
-
-                          // Call the welcome notification
-                          await _notificationService
-                              .showWelcomeNotificationIfFirstTime();
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
