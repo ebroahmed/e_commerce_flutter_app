@@ -48,7 +48,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
             // Address
             TextFormField(
               controller: addressController,
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              style: TextStyle(
+                decorationColor: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               decoration: InputDecoration(
                 labelText: 'Shipping Address',
                 labelStyle: TextStyle(

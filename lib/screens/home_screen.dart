@@ -217,6 +217,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: const EdgeInsets.all(12),
             child: TextField(
               controller: searchController,
+              style: TextStyle(
+                decorationColor: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               decoration: InputDecoration(
                 hintText: 'Search products...',
                 hintStyle: TextStyle(
