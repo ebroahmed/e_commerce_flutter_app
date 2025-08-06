@@ -26,35 +26,35 @@ A modern and fully functional 'E-Commerce mobile application' built using Flutte
 
 2. 📸 Screenshots
    
-  <h3>Login Screen</h3>
+  <h3>Login Page</h3>
 <img src="assets/screenshots/login.jpg" width="300" height="600"/>
 
- <h3>Register Screen</h3>
+ <h3>Register Page</h3>
 <img src="assets/screenshots/signup.jpg" width="300" height="600"/>
 
-  Home Page
-![Home](assets/screenshots/home.jpg)
+  <h3>Home Page</h3>
+<img src="assets/screenshots/home.jpg" width="300" height="600"/>
 
- Sidebar(drawer)
-![Admin](assets/screenshots/sidebar.jpg)
+<h3>Sidebar(Drawer)</h3>
+<img src="assets/screenshots/sidebar.jpg" width="300" height="600"/>
 
- Product Detail Page
-![Admin](assets/screenshots/detail.jpg)
+<h3>Product Detail Page</h3>
+<img src="assets/screenshots/detail.jpg" width="300" height="600"/>
 
- Cart Page
-![Cart](assets/screenshots/cart.jpg)
+<h3>Cart Page</h3>
+<img src="assets/screenshots/cart.jpg" width="300" height="600"/>
 
- Checkout Page
-![Admin](assets/screenshots/checkout.jpg)
+<h3>Checkout Page </h3>
+<img src="assets/screenshots/checkout.jpg" width="300" height="600"/>
 
- Profile Page
-![Admin](assets/screenshots/profile.jpg)
+<h3>Profile Page</h3>
+<img src="assets/screenshots/Profile.jpg" width="300" height="600"/>
 
-  Admin Panel
-![Admin](assets/screenshots/admin.jpg)
+<h3>Admin Page</h3>
+<img src="assets/screenshots/admin.jpg" width="300" height="600"/>
 
- Wishlist Page
-![Admin](assets/screenshots/wishlist.jpg)
+<h3>Wishlist</h3>
+<img src="assets/screenshots/wishlist.jpg" width="300" height="600"/>
 
 ---
 
