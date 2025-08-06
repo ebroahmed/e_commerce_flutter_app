@@ -25,9 +25,9 @@ A modern and fully functional 'E-Commerce mobile application' built using Flutte
 ---
 
 2. 📸 Screenshots
-
-  Login Screen
-<img src=" assets/screenshots/login.jpg" width=300 height=300/>
+   
+  <h3>Login Screen</h3>
+<img src="assets/screenshots/login.jpg" width="300" height="600"/>
 
  Register Screen
 ![SignUp](assets/screenshots/signup.jpg)
