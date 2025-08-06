@@ -48,7 +48,7 @@ A modern and fully functional 'E-Commerce mobile application' built using Flutte
 <img src="assets/screenshots/checkout.jpg" width="300" height="600"/>
 
 <h3>Profile Page</h3>
-<img src="assets/screenshots/Profile.jpg" width="300" height="600"/>
+<img src="assets/screenshots/profile.jpg" width="300" height="600"/>
 
 <h3>Admin Page</h3>
 <img src="assets/screenshots/admin.jpg" width="300" height="600"/>
