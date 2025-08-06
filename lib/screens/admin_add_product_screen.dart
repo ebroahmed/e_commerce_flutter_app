@@ -47,7 +47,13 @@ class _AdminAddProductScreenState extends ConsumerState<AdminAddProductScreen> {
       await ref.read(addProductProvider(productData).future);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Product added successfully!')),
+          SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            content: Text(
+              'Product added successfully!',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
         );
         _formKey.currentState!.reset();
         _nameController.clear();
