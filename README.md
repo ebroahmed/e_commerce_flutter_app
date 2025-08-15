@@ -78,7 +78,7 @@ A modern and fully functional 'E-Commerce mobile application' built using Flutte
 
 * Steps
 1. Clone this repo:
-git clone https://github.com/your-username/e_commerce_flutter_app.git
+git clone https://github.com/ebroahmed/e_commerce_flutter_app.git
 cd e_commerce_flutter_app
 
 2.Install dependencies:
